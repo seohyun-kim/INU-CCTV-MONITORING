@@ -1,0 +1,293 @@
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+       
+    </head>
+    <body>
+      <script>
+        //시작시간/종료시간을 지정하고, 수신한 데이터를 그래프와 테이블로 표시
+        function showCarData(){
+            
+            $('#showLatestTable').empty() 
+            $('#showLatestTable').append("<th>승용차</th>")
+            $('#showLatestTable').append("<th>자전거</th>")
+            $('#showLatestTable').append("<th>오토바이</th>")
+            $('#showLatestTable').append("<th>트럭</th>")
+            $('#showLatestTable').append("</tr>")
+            $('#showLatestTable').append('   <td id="car"></td>')
+            $('#showLatestTable').append('   <td id="bicycle"></td>')
+            $('#showLatestTable').append('   <td id="motorcycle"></td>')
+            $('#showLatestTable').append('   <td id="truck"></td>')
+            $('#showLatestTable').append("</tr>")
+            const config = {
+                    method: "post",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                    
+                        startDate: $("#selectStartDate").val(),
+                          endDate: $("#selectEndDate").val()})
+                };
+                fetch('/mainPage/tableDatetimeSelect2', config)
+                .then(res => res.json())
+
+                    .then(data => {
+                        console.log(data);
+                    
+                    $('#car').text(data[0]["sum(n_car)"]);
+                    $('#bicycle').text(data[0]['sum(n_bicycle)']);
+                    $('#motorcycle').text(data[0]['sum(n_motorcycle)']);
+                    $('#truck').text(data[0]['sum(n_truck)']);
+                    $('#showTotalCar').text(data[0]['sum(n_truck)']+data[0]["sum(n_car)"]+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']);                   
+                })
+                .catch(error => console.log(error))
+        }
+        function CreateImg() {
+        }
+        function showDataTable() {
+
+          const config = {
+              method: "post",
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                  startDate: $("#selectStartDate").val(),
+                  endDate: $("#selectEndDate").val()})
+          };
+          fetch('/mainPage/tableDatetimeSelect', config)
+            .then(res => res.json())
+            .then(json => {
+          
+              $(function () {
+              $(document).ready(function() {
+                  Highcharts.setOptions({
+                      global: {
+                          useUTC: false
+                      }
+                  });
+              });
+              var chart;
+              //시작시간 받아오는 함수
+              var getDay = function() {
+                  var data = [];
+                         for (i=0; i < json.length; i++) {
+                              data.push(
+                                  json[i].date_time
+                              );
+                          }
+                          console.log(data);
+                          return data;
+              };
+              //차트 각종 설정
+              $('#container').highcharts({
+                  chart: {
+                      type: 'spline'
+
+                  },
+                  title: {
+                      text: 'DATA GRAPH',
+                      x: -20
+                  },
+                  xAxis: {
+                      type: 'datetime',
+                      categories:getDay(),
+                  },
+                  yAxis: [{
+                      title: {
+                          text: 'People'
+                      },
+                      plotLines: [{
+                          value: 0,
+                          width: 1,
+                          color: '#808080'
+                      }]
+                  },
+                  {
+                      title: {
+                          text: 'Vehicle'
+                      },
+                      plotLines: [{
+                          value: 0,
+                          width: 1,
+                          color: '#808080'
+                      }]
+                  }],
+                  tooltip: {
+                      formatter: function() {
+                              return '<b>'+ this.series.name +'</b><br/>'+
+                              Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                              Highcharts.numberFormat(this.y, 2);
+                      }
+                  },
+                  legend: {
+                      enabled: false
+                  },
+                  exporting: {
+                      enabled: false
+                  },
+                  series: [{
+                      name: 'People data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data =[];
+                          for (i=0; i < json.length; i++) {
+                              data.push(
+                                 json[i].n_person
+                             );
+                          }
+                          console.log(data);
+                          return data;
+                      })()
+                   },
+                   {
+                      name: 'Vehicle data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data = [];
+                         for (i=0; i < json.length; i++) {
+                              data.push(
+                                (json[i].n_car+json[i].n_truck+json[i].n_bus+json[i].n_bicycle+json[i].n_motorcycle+json[i].n_electric_scooter)
+                              );
+                          }
+                          return data;
+                      })()
+                  }]
+              });
+         
+              $('#container1').highcharts({
+                  chart: {
+                      type: 'column'
+
+                  },
+                  title: {
+                      text: 'DATA GRAPH',
+                      x: -20
+                  },
+                  xAxis: {
+                      type: 'datetime',
+                      categories:getDay(),
+                  },
+                  yAxis: [{
+                      title: {
+                          text: 'People'
+                      },
+                      plotLines: [{
+                          value: 0,
+                          width: 1,
+                          color: '#808080'
+                      }]
+                  },
+                  {
+                      title: {
+                          text: 'Vehicle'
+                      },
+                      plotLines: [{
+                          value: 0,
+                          width: 1,
+                          color: '#808080'
+                      }]
+                  }],
+                  tooltip: {
+                      formatter: function() {
+                              return '<b>'+ this.series.name +'</b><br/>'+
+                              Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                              Highcharts.numberFormat(this.y, 2);
+                      }
+                  },
+                  legend: {
+                      enabled: false
+                  },
+                  exporting: {
+                      enabled: false
+                  },
+                  series: [{
+                      name: 'People data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data =[];
+                          for (i=0; i < json.length; i++) {
+                              data.push(
+                                 json[i].n_person
+                             );
+                          }
+                          console.log(data);
+                          return data;
+                      })()
+                   },
+                   {
+                      name: 'Vehicle data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data = [];
+                         for (i=0; i < json.length; i++) {
+                              data.push(
+                                (json[i].n_car+json[i].n_truck+json[i].n_bus+json[i].n_bicycle+json[i].n_motorcycle+json[i].n_electric_scooter)
+                              );
+                          }
+                          return data;
+                      })()
+                  }]
+              });
+
+
+              })
+            })
+            .catch(error => console.log(error))
+          }
+          function showCarSpeed(){
+            $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야'); 
+            $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~'); 
+            $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~'); 
+          
+          }
+          function showPerson(){
+            const config = {
+                    method: "post",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        startDate: $("#selectStartDate").val(),
+                        endDate: $("#selectEndDate").val()})
+                };
+                fetch('/mainPage/showPerson', config)
+
+                .then(res => res.json())
+
+                .then(data => {
+                    console.log(data);
+
+                $('#personpeople').text(data[0]['sum(n_person)']);                   
+                })
+                
+                .catch(error => console.log(error))
+
+          }
+          $(function() {
+            $(document).on("click", "#dateSelectBtn", function(){
+                showDataTable() ;
+                showCarData();
+                showCarSpeed();
+                CreateImg();
+                showPerson();
+            });
+          });
+     
+        
+       
+        // "기간 조회" 버튼 클릭 시 date form 2개 생성
+        //   function termInput(){
+        //     $('#showCarSpeed').empty();
+        //     $('#eachspeed').empty();
+        //     $('#carStayandRoot').empty();
+        //     $('#showTotalCar').empty();
+        //     $('#personpeople').empty();
+        //     $("#container").empty();
+        //     $("#container1").empty();
+        //     $("#addForm").empty();
+        //     $('#showLatestTable').empty();
+        //     $('#addForm').append("<input id='selectStartDate' type='date'> ~ ");
+        //     $('#addForm').append("<input id='selectEndDate' type='date'> ");
+        //     $('#addForm').append("<button type='button' id='dateSelectBtn'> Submit </button>");
+        //   }
+       
+      </script>
+    </body>
+</html> -->
