@@ -7,7 +7,7 @@
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
        <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script>
-       
+
         <%-include('part/daily.ejs')%>
         <%-include('part/period.ejs')%>
         <style>
@@ -53,7 +53,7 @@
         </style>
         <script>
             function btnDayCallback() {
-                
+
                 const clickedStyle = "text-decoration: underline #CC9F3C 3px; text-underline-position: under;";
                 const nonClickedStyle = "background-color: #999999;";
                 const day = document.getElementsByClassName("btnDay");
@@ -62,11 +62,11 @@
                 document.getElementById("showDayData").style.display = "inline-block";
                 for (var i = 0; i < 2; i++) {
                     day[i].style = clickedStyle;
-                    period[i].style = nonClickedStyle;                
+                    period[i].style = nonClickedStyle;
                 }
             }
             function btnPeriodCallback() {
-                
+
                 const clickedStyle = "text-decoration: underline #CC9F3C 3px; text-underline-position: under;";
                 const nonClickedStyle = "background-color: #999999;";
                 const day = document.getElementsByClassName("btnDay");
@@ -75,9 +75,30 @@
                 document.getElementById("showDayData").style.display = "none";
                 for (var i = 0; i < 2; i++) {
                     day[i].style = nonClickedStyle;
-                    period[i].style = clickedStyle;      
+                    period[i].style = clickedStyle;
                 }
             }
+
+            //socket
+            var port = JSON.parse('<%- JSON.stringify(port) %>');
+            console.log(port);
+            var socket = io.connect("http://localhost:" + port);
+            socket.on('outlierData', function(data) {
+              console.log(data);
+              notify(data.id, data.msg);
+            })
+
+            //Noti
+            Notification.requestPermission();
+            function notify(id, msg) {
+              if (Notification.permission !== "denied") {
+                new Notification("id="+id + ": " + msg);
+              }
+              else if (Notification.permission === "denied") {
+                Notification.requestPermission();
+              }
+            }
+
         </script>
     </head>
     <body>
@@ -127,7 +148,7 @@
                                     <div id="container"
                                             style="min-width: 100px; height: 400px; margin: 0 auto">
                                     </div>
-                                    
+
                                     <div style="display:inline-block;">
                                         <p id="car">승용차:  ~~대</p>
                                         <p id="bicycle">자전거:  ~~대</p>
@@ -220,7 +241,7 @@
 
                         <input type="date" id='selectStartDate' style="vertical-align: middle; margin: 3px 10px;" ~ >
                         <input type="date" id='selectEndDate' style="vertical-align: middle; margin: 3px 10px;">
-                        
+
                         <!-- <input type="button" value="Submit" style="border:1px solid; margin:2px; vertical-align:middle; margin: 3px 10px; background-color:#fff; cursor:pointer; border-radius:4px;">
                          -->
                          <button type='button' id='dateSelectBtn'> Submit </button>
@@ -241,7 +262,7 @@
                                     <div id="container1"
                                             style="min-width: 50px; height: 400px; margin: 0 auto">
                                     </div>
-                                   
+
                                     <div style="display:inline-block;">
                                         <p id="car1">승용차:  ~~대</p>
                                         <p id="bicycle1">자전거:  ~~대</p>

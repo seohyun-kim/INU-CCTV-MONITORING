@@ -11,4 +11,4 @@ var conn = mysql.createConnection({
 conn.connect();
 
 //외부 사용
-module.export =conn;
+module.exports =conn;
