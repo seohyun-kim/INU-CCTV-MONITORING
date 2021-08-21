@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -34,10 +34,10 @@
                     .then(data => {
                         console.log(data);
                     
-                    $('#car').text(data[0]["sum(n_car)"]);
-                    $('#bicycle').text(data[0]['sum(n_bicycle)']);
-                    $('#motorcycle').text(data[0]['sum(n_motorcycle)']);
-                    $('#truck').text(data[0]['sum(n_truck)']);
+                    $('#car1').text(data[0]["sum(n_car)"]);
+                    $('#bicycle1').text(data[0]['sum(n_bicycle)']);
+                    $('#motorcycle1').text(data[0]['sum(n_motorcycle)']);
+                    $('#truck1').text(data[0]['sum(n_truck)']);
                     $('#showTotalCar').text(data[0]['sum(n_truck)']+data[0]["sum(n_car)"]+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']);                   
                 })
                 .catch(error => console.log(error))
@@ -78,7 +78,7 @@
                           return data;
               };
               //차트 각종 설정
-              $('#container').highcharts({
+              $('#container0').highcharts({
                   chart: {
                       type: 'spline'
 
@@ -254,7 +254,7 @@
                 .then(data => {
                     console.log(data);
 
-                $('#personpeople').text(data[0]['sum(n_person)']);                   
+                $('#personpeople1').text(data[0]['sum(n_person)']);                   
                 })
                 
                 .catch(error => console.log(error))
@@ -290,4 +290,4 @@
        
       </script>
     </body>
-</html> -->
+</html>
