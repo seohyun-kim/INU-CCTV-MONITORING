@@ -48,29 +48,33 @@
                 const nonClickedStyle = "background-color: #999999;";
                 const day = document.getElementsByClassName("btnDay");
                 const period = document.getElementsByClassName("btnPeriod");
-                document.getElementById("showPeriodData").style.display = "inline-block";
-                document.getElementById("showDayData").style.display = "none";
-                day[0].style = clickedStyle;
-                period[0].style = nonClickedStyle;                
+                document.getElementById("showPeriodData").style.display = "none";
+                document.getElementById("showDayData").style.display = "inline-block";
+                for (var i = 0; i < 2; i++) {
+                    day[i].style = clickedStyle;
+                    period[i].style = nonClickedStyle;                
+                }
             }
             function btnPeriodCallback() {
                 const clickedStyle = "text-decoration: underline #CC9F3C 3px; text-underline-position: under;";
                 const nonClickedStyle = "background-color: #999999;";
                 const day = document.getElementsByClassName("btnDay");
                 const period = document.getElementsByClassName("btnPeriod");
-                document.getElementById("showPeriodData").style.display = "none";
-                document.getElementById("showDayData").style.display = "inline-block";
-                day[0].style = nonClickedStyle;
-                period[0].style = clickedStyle;      
+                document.getElementById("showPeriodData").style.display = "inline-block";
+                document.getElementById("showDayData").style.display = "none";
+                for (var i = 0; i < 2; i++) {
+                    day[i].style = nonClickedStyle;
+                    period[i].style = clickedStyle;      
+                }
             }
         </script>
     </head>
     <body>
         <div id="header">
-            <img src="camera.png">
+            <img src="/images/camera.png">
             <h2 style="color:#fff; margin: 0;">CCTV 모니터링 시스템</h2>
             <div style="text-align: right;">
-                <img src="logo.png">
+                <img src="/images/logo.png">
             </div>
         </div>
         <div id="section">
@@ -145,6 +149,7 @@
                                     <img src="/images/turn-left.png" style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1);">
                                     <p>~~회</p>
                                     <img src="/images/straight-ahead.png">
+                                    <p>~~회</p>
                                 </div>
                             </div>
                             <p>사람 DATA</p>
@@ -195,7 +200,8 @@
                 </div>
                 <div style="border:10px #3A6EAE solid; background-color: #3A6EAE; padding:10px; display:inline-block;">
                     <form class="setPeriod" style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
-                        <input type="date" style="vertical-align: middle; margin: 3px 10px;">
+                        <input type="datetime-local" style="vertical-align: middle; margin: 3px 10px;">
+                        <input type="datetime-local">
                         <input type="button" value="Submit" style="border:1px solid; margin:2px; vertical-align:middle; margin: 3px 10px; background-color:#fff; cursor:pointer; border-radius:4px;">
                     </form>
                     <div style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
@@ -245,6 +251,7 @@
                                     <img src="/images/turn-left.png" style="-moz-transform: scaleX(-1); -o-transform: scaleX(-1); -webkit-transform: scaleX(-1); transform: scaleX(-1);">
                                     <p>~~회</p>
                                     <img src="/images/straight-ahead.png">
+                                    <p>~~회</p>
                                 </div>
                             </div>
                             <p>사람 DATA</p>
