@@ -6,20 +6,8 @@
     </head>
     <body>
       <script>
-        //시작시간/종료시간을 지정하고, 수신한 데이터를 그래프와 테이블로 표시
+        //시작시간/종료시간에 해당하는  차량들의 수를 나타내주는 함수
         function showCarData(){
-
-            $('#showLatestTable').empty()
-            $('#showLatestTable').append("<th>승용차</th>")
-            $('#showLatestTable').append("<th>자전거</th>")
-            $('#showLatestTable').append("<th>오토바이</th>")
-            $('#showLatestTable').append("<th>트럭</th>")
-            $('#showLatestTable').append("</tr>")
-            $('#showLatestTable').append('   <td id="car"></td>')
-            $('#showLatestTable').append('   <td id="bicycle"></td>')
-            $('#showLatestTable').append('   <td id="motorcycle"></td>')
-            $('#showLatestTable').append('   <td id="truck"></td>')
-            $('#showLatestTable').append("</tr>")
             const config = {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
@@ -32,18 +20,18 @@
                 .then(res => res.json())
 
                     .then(data => {
-                        console.log(data);
+                        console.log(data);   
+                        $('#car1').text("승용차:    "+data[0]["sum(n_car)"]+"대");
+                        $('#bicycle1').text("자전거:    "+data[0]['sum(n_bicycle)']+"대");
+                        $('#motorcycle1').text("오토바이: "+data[0]['sum(n_motorcycle)']+"대");
+                        $('#truck1').text("트럭:    "+data[0]['sum(n_truck)']+"대");              
 
-                    $('#car1').text(data[0]["sum(n_car)"]);
-                    $('#bicycle1').text(data[0]['sum(n_bicycle)']);
-                    $('#motorcycle1').text(data[0]['sum(n_motorcycle)']);
-                    $('#truck1').text(data[0]['sum(n_truck)']);
-                    $('#showTotalCar').text(data[0]['sum(n_truck)']+data[0]["sum(n_car)"]+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']);
                 })
                 .catch(error => console.log(error))
         }
         function CreateImg() {
         }
+        //시작시간/종료시간에 해당하는  차트를 나타내주는 함수
         function showDataTable() {
 
           const config = {
@@ -233,12 +221,14 @@
             })
             .catch(error => console.log(error))
           }
+          //시작시간/종료시간에 해당하는  차량 속도를 나타내주는 함수 --> 나중에
           function showCarSpeed(){
-            $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야');
-            $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~');
-            $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~');
+            // $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야');
+            // $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~');
+            // $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~');
 
           }
+          //시작시간/종료시간에 해당하는  시림들의 수를 나타내주는 함수 
           function showPerson(){
             const config = {
                     method: "post",
@@ -254,7 +244,8 @@
                 .then(data => {
                     console.log(data);
 
-                $('#personpeople1').text(data[0]['sum(n_person)']);
+
+                $('#personpeople1').text("사람: "+data[0]['sum(n_person)']+"명");                   
                 })
 
                 .catch(error => console.log(error))

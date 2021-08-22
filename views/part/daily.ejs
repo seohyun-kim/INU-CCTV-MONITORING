@@ -6,20 +6,8 @@
     </head>
     <body>
       <script>
-        //시작시간/종료시간을 지정하고, 수신한 데이터를 그래프와 테이블로 표시
-
+        //정해진 시간에 해당하는 차량들 수 표시하는 함수
         function showcarData() {
-                    // $('#showLatestTable').empty();
-                    // $('#showLatestTable').append("<th>승용차</th>")
-                    // $('#showLatestTable').append("<th>자전거</th>")
-                    // $('#showLatestTable').append("<th>오토바이</th>")
-                    // $('#showLatestTable').append("<th>트럭</th>")
-                    // $('#showLatestTable').append("</tr>")
-                    // $('#showLatestTable').append('   <td id="car"></td>')
-                    // $('#showLatestTable').append('   <td id="bicycle"></td>')
-                    // $('#showLatestTable').append('   <td id="motorcycle"></td>')
-                    // $('#showLatestTable').append('   <td id="truck"></td>')
-                    // $('#showLatestTable').append("</tr>")
                   
                     const config = {
                     method: "post",
@@ -61,9 +49,11 @@
         // img.title = name;
         // document.getElementById('#showimg2'+i).appendChild(img);
         //  }   
+        //시간에 따른 이미지 표시
         function showimg(){
 
         }
+        //정해진 시간에 해당하는 차트 그려주는 함수
         function showDayTable() {
 
             const config = {
@@ -175,6 +165,7 @@
             })
             .catch(error => console.log(error))
           }
+           //정해진 시간에 해당하는 차량들의 속도 표시해주는 함수 --> 데이터 들어오면 할 것
           function showcarSpeed(){
         //     const config = {
         //             method: "post",
@@ -195,6 +186,7 @@
             $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~'); 
             $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~'); 
           }
+           //정해진 시간에 해당하는 사람들 수 표시하는 함수
           function showperson(){
             const config = {
                     method: "post",
@@ -241,10 +233,6 @@
        
       </script>
     </body>
-<<<<<<< HEAD
-</html>
-=======
+
 </html>
 
-
->>>>>>> d555fc156f728266256d0aaded4e1874e4c816f1
