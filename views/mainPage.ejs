@@ -12,27 +12,9 @@
         <%-include('part/period.ejs')%>
         <style>
             img {
-                max-width: 50px;
+                max-width: 40px;
                 height: auto;
             }
-            button {
-                width:100px;
-                background-color: #3A6EAE;
-                border-radius:15px 15px 0px 0px;
-                border: none;
-                color:#fff;
-                padding: 10px 0;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 15px;
-                margin: 0;
-                cursor: pointer;
-            }
-            div {
-                background-color:aqua;
-            }
-
             #header {
                 text-align: center;
                 background-color: #767676;
@@ -49,6 +31,20 @@
             .carData > div > img,
             .carData > div > p {
                 display:inline-block;
+            }
+            body > div > div > div > button {
+                width:100px;
+                background-color: #3A6EAE;
+                border-radius:15px 15px 0px 0px;
+                border: none;
+                color:#fff;
+                padding: 10px 0;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 15px;
+                margin: 0;
+                cursor: pointer;
             }
         </style>
                <script>
@@ -130,7 +126,7 @@
                 <img src="/images/logo.png">
             </div>
         </div>
-        <div id="section">
+        <div id="section" style="text-align: center;">
             <div id="realTimeData" style="display:inline-block; width:8%;">
                 <p style="text-align: center">실시간 데이터</p>
                 <div id="showRTData" style="border:1px solid; text-align: center;">
@@ -153,23 +149,17 @@
                 <div style="border:10px #3A6EAE solid; background-color: #3A6EAE; padding:10px; display:inline-block;">
                     <form class="setPeriod" style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
                         <input type="date"  id='selectDay' style="vertical-align: middle; margin: 3px 10px;">
-                        <!-- <input type="date"  id="selectEndDate" style="vertical-align: middle; margin: 3px 10px;"> -->
-                        <!-- <input type="button" value="Submit" style="border:1px solid; margin:2px; vertical-align:middle; margin: 3px 10px; background-color:#fff; cursor:pointer; border-radius:4px;">
-                         -->
                         <button type='button' id='daySelectBtn'> Submit </button>
                     </form>
                     <div style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
-                        <div id="dayGraph" style="display:inline-block; padding: 5px;">
-
+                        <div id="container"
+                                style="min-width: 400px; height: 600px; margin: 0 auto; display:inline-block;">
                         </div>
                         <div style="display:inline-block;">
                             <p>차량 DATA</p>
                             <div class="carData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div>
-                                    <div id="container"
-                                            style="min-width: 100px; height: 400px; margin: 0 auto">
-                                    </div>
-
+                                    원형 그래프
                                     <div style="display:inline-block;">
                                         <p id="car">승용차:  ~~대</p>
                                         <p id="bicycle">자전거:  ~~대</p>
@@ -261,28 +251,22 @@
                     <form class="setPeriod" style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
                         <input type="datetime-local" id='selectStartDate' style="vertical-align: middle; margin: 3px 10px;" ~ >
                         <input type="datetime-local" id='selectEndDate' style="vertical-align: middle; margin: 3px 10px;">
-
-                        <!-- <input type="button" value="Submit" style="border:1px solid; margin:2px; vertical-align:middle; margin: 3px 10px; background-color:#fff; cursor:pointer; border-radius:4px;">
-                         -->
-                         <button type='button' id='dateSelectBtn'> Submit </button>
-
-
+                        <button type='button' id='dateSelectBtn'> Submit </button>
                     </form>
                     <div style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
                         <div id="dayGraph" style="display:inline-block; padding: 5px;">
-
+                            <div id="container0"
+                                    style="min-width: 400px; height: 300px; margin: 0 auto">
+                            </div>
+                            <div id="container1"
+                                    style="min-width: 400px; height: 300px; margin: 0 auto">
+                            </div>
                         </div>
                         <div style="display:inline-block;">
                             <p>차량 DATA</p>
                             <div class="carData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div>
-                                    <div id="container0"
-                                            style="min-width: 50px; height: 400px; margin: 0 auto">
-                                    </div>
-                                    <div id="container1"
-                                            style="min-width: 50px; height: 400px; margin: 0 auto">
-                                    </div>
-
+                                    원형그래프
                                     <div style="display:inline-block;">
                                         <p id="car1">승용차:  ~~대</p>
                                         <p id="bicycle1">자전거:  ~~대</p>
