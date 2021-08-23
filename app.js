@@ -9,7 +9,7 @@ const http=require('http');
 const socketio = require('socket.io');
 const MySQLEvents = require('mysql-events');
 const cors = require('cors');
-var conn = require('./conf/db');//mysql 연결
+var conn = require('./conf/db_template');//mysql 연결
 
 //express 사용
 const app = express();
@@ -77,7 +77,6 @@ io.on("connection", (socket) => {
 });
 
 app.get('/', (req, res) => {
-  //  res.render(path.join(__dirname + '/views/mainPage.ejs'));
   res.redirect('/login');
 });
 
@@ -133,8 +132,9 @@ app.post('/mainPage/tableDatetimeSelect', (req, res) => {
     console.log(data.startDate);
     var sql = "SELECT * FROM cctv_data WHERE date_time >=? AND date_time <= ?";
     conn.query(sql, [data.startDate, data.endDate], (err, row) => {
-        if (err) {
+        if (err) {           
             console.log(err);
+            res.json(err);
         } else {
             //console.log(row);
             res.json(row);
@@ -149,6 +149,22 @@ app.post('/mainPage/tableDatetimeSelect2', (req, res) => {
     conn.query(sql, [data.startDate, data.endDate], (err, row) => {
         if (err) {
             console.log(err);
+            //res.json(err);
+        } else {
+            //console.log(row);
+            res.json(row);
+        }
+    });
+});
+//시작시간/종료시간에 따른 차량들의 합계
+app.post('/mainPage/cardata', (req, res) => {
+    var data = req.body;
+    console.log(data.startDate);
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE date_time >=? AND date_time <= ?";
+    conn.query(sql, [data.startDate, data.endDate], (err, row) => {
+        if (err) {
+            console.log(err);
+           // res.json(err);
         } else {
             //console.log(row);
             res.json(row);
@@ -163,6 +179,7 @@ app.post('/mainPage/showPerson', (req, res) => {
     conn.query(sql,[data.startDate, data.endDate], (err, row) => {
         if (err) {
             console.log(err);
+          //  res.json(err);
         } else {
             //console.log(row);
             res.json(row);
@@ -178,6 +195,7 @@ app.post('/mainPage/tableDaytimeSelect', (req, res) => {
     conn.query(sql, [data._Date, data._Date], (err, row) => {
         if (err) {
             console.log(err);
+            res.json(err);
         } else {
             //console.log(row);
             res.json(row);
@@ -199,6 +217,20 @@ app.post('/mainPage/tableDaytimeSelect2', (req, res) => {
         }
     });
 
+});
+//시작에 따른 차량들의 합계
+app.post('/mainPage/carData1', (req, res) => {
+    var data = req.body;
+    console.log(data.startDate);
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE  date_time >= CONCAT(?,' 00:00:00') AND date_time <= CONCAT(?,' 23:59:59')";
+    conn.query(sql, [data._Date, data._Date], (err, row) => {
+        if (err) {
+            console.log(err);
+        } else {
+            
+            res.json(row);
+        }
+    });
 });
 //시간에 따른 사람들의 수
 app.post('/mainPage/showpperson', (req, res) => {

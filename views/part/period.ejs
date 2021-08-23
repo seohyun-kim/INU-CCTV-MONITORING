@@ -2,8 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-
-    </head>
+      
     <body>
       <script>
         //시작시간/종료시간에 해당하는  차량들의 수를 나타내주는 함수
@@ -20,7 +19,7 @@
                 .then(res => res.json())
 
                     .then(data => {
-                        console.log(data);   
+                    
                         $('#car1').text("승용차:    "+data[0]["sum(n_car)"]+"대");
                         $('#bicycle1').text("자전거:    "+data[0]['sum(n_bicycle)']+"대");
                         $('#motorcycle1').text("오토바이: "+data[0]['sum(n_motorcycle)']+"대");
@@ -44,7 +43,10 @@
           fetch('/mainPage/tableDatetimeSelect', config)
             .then(res => res.json())
             .then(json => {
-
+                if(json.errno==1525)
+                {
+                    alert("날짜를 다시 입력해주세요.");
+                }
               $(function () {
               $(document).ready(function() {
                   Highcharts.setOptions({
@@ -215,6 +217,7 @@
                       })()
                   }]
               });
+              
 
 
               })
@@ -226,8 +229,11 @@
             // $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야');
             // $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~');
             // $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~');
+            
 
           }
+          
+       
           //시작시간/종료시간에 해당하는  시림들의 수를 나타내주는 함수 
           function showPerson(){
             const config = {
@@ -242,8 +248,7 @@
                 .then(res => res.json())
 
                 .then(data => {
-                    console.log(data);
-
+                 
 
                 $('#personpeople1').text("사람: "+data[0]['sum(n_person)']+"명");                   
                 })
@@ -251,6 +256,90 @@
                 .catch(error => console.log(error))
 
           }
+          function showchart(){  
+              $('#container5').empty();
+              const config = {
+              method: "post",
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                  startDate: $("#selectStartDate").val(),
+                  endDate: $("#selectEndDate").val()})
+                 };
+          fetch('/mainPage/cardata', config)
+            .then(res => res.json())
+            .then(data => {
+             
+              console.log(data);
+            // generate an array of random data
+            var data1 = [];
+            var totaldata;
+           
+                data1.push(
+                    ['car',data[0]['sum(n_car)']],
+                    ['bicycle',data[0]['sum(n_bicycle)']],
+                    ['motorcycle',data[0]['sum(n_motorcycle)']],
+                    ['truck',data[0]['sum(n_truck)']]
+                );
+                
+            
+           console.log(data1);
+            anychart.onDocumentReady(function () {
+            var data = anychart.data.set(data1);
+            var chart = anychart.pie(data);
+
+            // set the chart radius making a donut chart
+            chart.innerRadius('55%')
+            // create a color palette
+            var palette = anychart.palettes.distinctColors();
+            
+            // set the colors according to the brands
+            palette.items([
+                { color: '#1dd05d' },
+                { color: '#00a3da' },
+                { color: '#156ef2' },
+                { color: '#f60000' },
+                // { color: '#96a6a6' }
+            ]);
+            
+            // apply the donut chart color palette
+            chart.palette(palette);
+            
+            // set the position of labels
+            chart.labels().format('{%x} : {%y}대').fontSize(13);
+            chart.labels().fontColor('#000000');
+            // disable the legend
+            chart.legend(false);
+            
+            // format the donut chart tooltip
+            chart.tooltip().format('{%x}: {%PercentValue}%');
+            // create a standalone label
+            var label = anychart.standalones.label();
+            // configure the label settings
+            label
+                .useHtml(true)
+                .text(
+                '<span style = "color: #313136; font-size:10px;">350</span>' 
+                // '<br/><br/></br><span style="color:#444857; font-size: 14px;"><i>Spotify and Apple Music have more <br/>than 50% of the total market share</i></span>'
+                )
+                .position('center')
+                .anchor('center')
+                .hAlign('center')
+                .vAlign('middle')
+                
+            // set the label as the center content
+           
+            chart.center().content(label);
+            
+            // set container id for the chart
+            chart.container('container5');
+            
+            // initiate chart drawing
+            chart.draw();
+        })
+         })
+            .catch(error => console.log(error))
+        
+        }
           $(function() {
             $(document).on("click", "#dateSelectBtn", function(){
                 showDataTable() ;
@@ -258,6 +347,7 @@
                 showCarSpeed();
                 CreateImg();
                 showPerson();
+                showchart();
             });
           });
 
