@@ -22,12 +22,18 @@
                 .then(res => res.json())
 
                 .then(data => {
-                    console.log(data);
-
-                $('#car').text("승용차:    "+data[0]["sum(n_car)"]+"대");
-                $('#bicycle').text("자전거:    "+data[0]['sum(n_bicycle)']+"대");
-                $('#motorcycle').text("오토바이: "+data[0]['sum(n_motorcycle)']+"대");
-                $('#truck').text("트럭:    "+data[0]['sum(n_truck)']+"대");
+                    const _car = document.querySelector('#car'); 
+                    const _bicycle = document.querySelector('#bicycle'); 
+                    const _motorcycle = document.querySelector('#motorcycle');
+                    const _truck = document.querySelector('#truck');
+                    _car.innerText = "승용차".padEnd(15)+" : "+data[0]["sum(n_car)"]+" 대"
+                    _bicycle.innerText = "자전거".padEnd(15)+" : "+data[0]['sum(n_bicycle)']+" 대"
+                    _motorcycle.innerText = "오토바이"+" : "+data[0]['sum(n_motorcycle)']+" 대"
+                    _truck.innerText = "트럭".padEnd(15)+" :"+data[0]['sum(n_truck)']+" 대"
+                // $('#car').text("승용차".padStart(3)+":"+data[0]["sum(n_car)"]+"대");
+                // $('#bicycle').text("자전거:    "+data[0]['sum(n_bicycle)']+"대");
+                // $('#motorcycle').text("오토바이: "+data[0]['sum(n_motorcycle)']+"대");
+                // $('#truck').text("트럭:    "+data[0]['sum(n_truck)']+"대");
                // $('#showTotalCar').text(data[0]['sum(n_truck)']+data[0]["sum(n_car)"]+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']);                   
                 })
                 .catch(error => console.log(error))
