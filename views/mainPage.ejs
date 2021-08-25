@@ -47,6 +47,15 @@
                 margin: 0;
                 cursor: pointer;
             }
+            .horizontal_left { text-align: left; }
+            .horizontal_center { text-align: center; }
+            .horizontal_right { text-align: right; }
+            .margin_0 { margin: 0px; }
+            .margin_5 { margin: 5px; }
+            .margin_10 { margin: 10px; }
+            .display_ib { display: inline-block; }
+            .display_b { display: block; }
+            .display_i { display: inline; }
         </style>
                <script>
                 var port = JSON.parse('<%- JSON.stringify(port) %>');
@@ -157,14 +166,14 @@
                                 style="min-width: 400px; height: 600px; margin: 0 auto; display:inline-block;">
                         </div>
                         <div style="display:inline-block;">
-                            <p>차량 DATA</p>
+                            <p class="horizontal_left">차량 DATA</p>
                             <div class="carData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div>
                                     <div id="carchart" style="display: inline-block; width:200px; ">
                                         <p id="text" style="margin-bottom: 0px; margin-top: 0px;">원형그래프</p>
                                     </div>
                                     <div style="display:inline-block; width:200px">
-                                        <table border="0" style="width: 180px;">
+                                        <table class="horizontal_right" border="0" style="width: 180px;">
                                             <tr>
                                               <th>승용차:</th>
                                               <td id="car">~~대</th>
@@ -222,10 +231,10 @@
                                     <p>~~회</p>
                                 </div>
                             </div>
-                            <p>사람 DATA</p>
+                            <p class="horizontal_left">사람 DATA</p>
                             <div class="peopleData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div style="display: inline-block">
-                                    <p>건물출입관리</p>
+                                    <p class="horizontal_left">건물출입관리</p>
                                     <div style="display: inline-block">
                                         <img src="/images/court-house.png">
                                         <p>27호관</p>
@@ -246,8 +255,7 @@
                                     </div>
                                 </div>
                                 <div style="display: inline-block">
-                                    <p>이동경로</p>
-                                    <br>
+                                    <p class="horizontal_left">이동경로</p>
                                     <p>ROOT A : ~회</p>
                                     <p>ROOT B : ~회</p>
                                     <p>ROOT C : ~회</p>
@@ -284,7 +292,7 @@
                             </div>
                         </div>
                         <div style="display:inline-block;">
-                            <p>차량 DATA</p>
+                            <p class="horizontal_left">차량 DATA</p>
                             <div class="carData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div>
                                     <div id="container5" style="display: inline-block; width:200px; ">
@@ -292,7 +300,7 @@
                                         <p id="text1" style="margin-bottom: 0px; margin-top: 0px;">원형그래프</p>
                                     </div>
                                     <div style="display:inline-block; width:200px;">
-                                        <table border="0" style="width: 180px;">
+                                        <table class="horizontal_right" border="0" style="width: 180px;">
                                             <tr>
                                               <th>승용차:</th>
                                               <td id="car1">~~대</th>
@@ -350,10 +358,10 @@
                                     <p>~~회</p>
                                 </div>
                             </div>
-                            <p>사람 DATA</p>
+                            <p class="horizontal_left">사람 DATA</p>
                             <div class="peopleData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div style="display: inline-block">
-                                    <p>건물출입관리</p>
+                                    <p class="horizontal_left">건물출입관리</p>
                                     <div style="display: inline-block">
                                         <img src="/images/court-house.png">
                                         <p>27호관</p>
@@ -374,8 +382,7 @@
                                     </div>
                                 </div>
                                 <div style="display: inline-block">
-                                    <p>이동경로</p>
-                                    <br>
+                                    <p class="horizontal_left">이동경로</p>
                                     <p>ROOT A : ~회</p>
                                     <p>ROOT B : ~회</p>
                                     <p>ROOT C : ~회</p>
