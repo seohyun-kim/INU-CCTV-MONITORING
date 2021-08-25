@@ -131,21 +131,6 @@ app.get('/mainPage', (req, res) => {
     });
 });
 
-// app.get('/mainPage', (req, res) => {
-//     if (!req.session.email) {
-//         res.redirect('/login');
-//     }
-//     var sql = 'select min(date_time), max(date_time) from cctv_data';
-//     conn.query(sql, (err, row) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             //console.log(row);
-//             res.render('./mainPage.ejs', { data: row[0], port: port }); // min(start_date), max(end_date)
-//         }
-//     });
-// });
-
 
 //시작시간/종료시간을 지정하고, 수신한 데이터를 그래프로 표시
 app.post('/mainPage/tableDatetimeSelect', (req, res) => {
