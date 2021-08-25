@@ -29,10 +29,10 @@
                     const _truck = document.querySelector('#truck');
                    // $('#car').text( "승용차"+":".padEnd(8-(data[0]["sum(n_car)"]).toString().length)+"8대");
                     
-                    _car.innerText = "승용차"+":".padEnd(6-(data[0]["sum(n_car)"]).toString().length,' ')+data[0]["sum(n_car)"]+"대"
-                    _bicycle.innerHTML = "자전거"+":".padEnd(6-(data[0]["sum(n_bicycle)"]).toString().length,' ')+data[0]['sum(n_bicycle)']+"대"
-                    _motorcycle.innerText = "오토바이"+":".padEnd(4-(data[0]["sum(n_motorcycle)"]).toString().length,' ')+data[0]['sum(n_motorcycle)']+"대"
-                    _truck.innerText = "  트럭"+":".padEnd(8-(data[0]["sum(n_truck)"]).toString().length,' ')+data[0]['sum(n_truck)']+"대"
+                    _car.innerText =data[0]["sum(n_car)"]+"대"
+                    _bicycle.innerHTML =data[0]["sum(n_bicycle)"]+"대"
+                    _motorcycle.innerText =data[0]["sum(n_motorcycle)"]+"대"
+                    _truck.innerText =data[0]["sum(n_truck)"]+"대"
                                  
                 })
                 .catch(error => console.log(error))
@@ -197,7 +197,7 @@
           }
            //정해진 시간에 해당하는 사람들 수 표시하는 함수
           function showperson(){
-            $('#carchart').empty();
+            
             const config = {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
@@ -219,6 +219,7 @@
 
           }
           function showChart(){  
+            $('#carchart').empty();
               const config = {
               method: "post",
               headers: {'Content-Type': 'application/json'},
@@ -285,7 +286,7 @@
             label
                 .useHtml(true)
                 .text(
-                '<span style = "color: #313136; font-size:10px;">350</span>' 
+                '<span style = "color: #313136; font-size:10px;">150</span>' 
                 // '<br/><br/></br><span style="color:#444857; font-size: 14px;"><i>Spotify and Apple Music have more <br/>than 50% of the total market share</i></span>'
                 )
                 .position('center')

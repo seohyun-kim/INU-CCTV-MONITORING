@@ -20,10 +20,16 @@
 
                     .then(data => {
                     
-                        $('#car1').text("승용차:    "+data[0]["sum(n_car)"]+"대");
-                        $('#bicycle1').text("자전거:    "+data[0]['sum(n_bicycle)']+"대");
-                        $('#motorcycle1').text("오토바이: "+data[0]['sum(n_motorcycle)']+"대");
-                        $('#truck1').text("트럭:    "+data[0]['sum(n_truck)']+"대");              
+                        const _car = document.querySelector('#car1'); 
+                        const _bicycle = document.querySelector('#bicycle1'); 
+                        const _motorcycle = document.querySelector('#motorcycle1');
+                        const _truck = document.querySelector('#truck1');
+                    // $('#car').text( "승용차"+":".padEnd(8-(data[0]["sum(n_car)"]).toString().length)+"8대");
+                        
+                        _car.innerText =data[0]["sum(n_car)"]+"대"
+                        _bicycle.innerHTML =data[0]["sum(n_bicycle)"]+"대"
+                        _motorcycle.innerText =data[0]["sum(n_motorcycle)"]+"대"
+                        _truck.innerText =data[0]["sum(n_truck)"]+"대"           
 
                 })
                 .catch(error => console.log(error))
@@ -257,7 +263,7 @@
 
           }
           function showchart(){  
-              $('#container5').empty();
+             $('#container5').empty();
               const config = {
               method: "post",
               headers: {'Content-Type': 'application/json'},
@@ -318,7 +324,7 @@
             label
                 .useHtml(true)
                 .text(
-                '<span style = "color: #313136; font-size:10px;">350</span>' 
+                '<span style = "color: #313136; font-size:10px;">150</span>' 
                 // '<br/><br/></br><span style="color:#444857; font-size: 14px;"><i>Spotify and Apple Music have more <br/>than 50% of the total market share</i></span>'
                 )
                 .position('center')
