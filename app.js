@@ -9,7 +9,7 @@ const http=require('http');
 const socketio = require('socket.io');
 const MySQLEvents = require('mysql-events');
 const cors = require('cors');
-var conn = require('./conf/db_template');//mysql 연결
+var conn = require('./conf/db');//mysql 연결
 
 //express 사용
 const app = express();

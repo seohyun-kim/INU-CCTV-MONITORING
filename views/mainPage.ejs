@@ -145,7 +145,7 @@
             <div id="showDayData" style="display:inline-block; vertical-align:top; width:91%">
                 <div>
                     <button class="btnDay" onclick="btnDayCallback()" style="text-decoration: underline #CC9F3C 3px; text-underline-position: under;">일간통계</button>
-                    <button class="btnPeriod" onclick="btnPeriodCallback()" style="background-color: #999999;">주간통계</button>
+                    <button class="btnPeriod" onclick="btnPeriodCallback()" style="background-color: #999999;">기간통계</button>
                 </div>
                 <div style="border:10px #3A6EAE solid; background-color: #3A6EAE; padding:10px; display:inline-block;">
                     <form class="setPeriod" style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
@@ -266,7 +266,7 @@
             <div id="showPeriodData" style="display:none; vertical-align:top; width:91%;">
                 <div>
                     <button class="btnDay" onclick="btnDayCallback()" style="text-decoration: underline #CC9F3C 3px; text-underline-position: under;">일간통계</button>
-                    <button class="btnPeriod" onclick="btnPeriodCallback()" style="background-color: #999999;">주간통계</button>
+                    <button class="btnPeriod" onclick="btnPeriodCallback()" style="background-color: #999999;">기간통계</button>
                 </div>
                 <div style="border:10px #3A6EAE solid; background-color: #3A6EAE; padding:10px; display:inline-block;">
                     <form class="setPeriod" style="background-color: #fff; border-radius:5px; padding: 5px; margin: 5px;">
@@ -288,6 +288,7 @@
                             <div class="carData" style="border:1px solid; border-radius: 5px; padding: 5px;">
                                 <div>
                                     <div id="container5" style="display: inline-block; width:200px; ">
+                                        <p id="overlay"></p>
                                         <p id="text1" style="margin-bottom: 0px; margin-top: 0px;">원형그래프</p>
                                     </div>
                                     <div style="display:inline-block; width:200px;">
