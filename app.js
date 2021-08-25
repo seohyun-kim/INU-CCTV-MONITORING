@@ -10,6 +10,7 @@ const socketio = require('socket.io');
 const MySQLEvents = require('mysql-events');
 const cors = require('cors');
 var conn = require('./conf/db');//mysql 연결
+var md5 = require('md5');
 
 //express 사용
 const app = express();
@@ -100,7 +101,9 @@ app.post('/login', (req, res) => {
             if (row.length == 0) {
                 res.write('<script>alert("Wrong ID. Please check the ID"); history.back();</script>');
             } else {
-                if (row[0].user_pw != req.body.userPw) {
+              // console.log(req.body.userPw);
+              // console.log(md5(req.body.userPw));
+                if (row[0].user_pw != md5(req.body.userPw)) {
                     res.write('<script>alert("Wrong Passward. Please check the Passward"); history.back();</script>');
                 } else {
                     req.session.email = req.body.userId;
@@ -132,7 +135,7 @@ app.post('/mainPage/tableDatetimeSelect', (req, res) => {
     console.log(data.startDate);
     var sql = "SELECT * FROM cctv_data WHERE date_time >=? AND date_time <= ?";
     conn.query(sql, [data.startDate, data.endDate], (err, row) => {
-        if (err) {           
+        if (err) {
             console.log(err);
             res.json(err);
         } else {
@@ -227,7 +230,7 @@ app.post('/mainPage/carData1', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            
+
             res.json(row);
         }
     });
