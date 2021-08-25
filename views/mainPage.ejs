@@ -105,6 +105,21 @@
                     period[i].style = clickedStyle;
                 }
             }
+            function initDate() {
+                let today = new Date();
+                let year = today.getFullYear();
+                let month = ('0' + (today.getMonth() + 1)).slice(-2);
+                let day = ('0' + today.getDate()).slice(-2);
+                let dateString = year + '-' + month + '-' + day;
+                let hours = ('0' + today.getHours()).slice(-2); 
+                let minutes = ('0' + today.getMinutes()).slice(-2);
+                let seconds = '00'
+                let timeString = hours + ':' + minutes  + ':' + seconds;
+                console.log(dateString);
+                document.getElementById("selectDay").value = dateString;
+                document.getElementById("selectStartDate").value = dateString + 'T' + timeString;
+                document.getElementById("selectEndDate").value = dateString + 'T' + timeString;
+            }
 
             //socket
             var port = JSON.parse('<%- JSON.stringify(port) %>');
@@ -399,5 +414,10 @@
                 </div>
             </div>
         </div>
+        <script>
+            initDate();
+            doRefreshDay();
+            doRefreshPeriod();
+        </script>
     </body>
 </html>
