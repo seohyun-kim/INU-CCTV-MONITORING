@@ -12,6 +12,7 @@ const cors = require('cors');
 var conn = require('./conf/db');//mysql 연결
 var md5 = require('md5');
 
+
 //express 사용
 const app = express();
 app.set('view engine', 'ejs');
@@ -47,12 +48,12 @@ io.on("connection", (socket) => {
 
   //  mysql events
     var dsn = {
-      host : '',
-      user : '',
-      password : ''
+      host : '117.16.214.73',
+      user : 'malab',
+      password : 'malab123'
       };
-      var lastRowID = -1;
-      var mysqlEventWatcher = MySQLEvents(dsn);
+
+       var mysqlEventWatcher = MySQLEvents(dsn);
       var watcher =mysqlEventWatcher.add(
         'cctv.backup',
         function (oldRow, newRow, event) {
@@ -75,7 +76,46 @@ io.on("connection", (socket) => {
         },
         'Active'
     );
+  //
+  //   var watcher_rt =mysqlEventWatcher.add(
+  //     'cctv.test', //test (원랜 cctv_data)
+  //     function (oldRow, newRow, event) {
+  //     if (oldRow === null) {
+  //         console.log("now data in test table");
+  //         var sql = 'select * from test order by rid desc limit 1';
+  //         conn.query(sql, (err, row) => {
+  //             if (err) {
+  //                 console.log(err);
+  //             } else {
+  //                 socket.emit("refreshData", row[0]);
+  //               //  console.log(row[0]);
+  //             }
+  //         });
+  //       }
+  //
+  //     },
+  //     'Active'
+  // );
+
+
 });
+
+//
+// //refresh DATA
+// var job = schedule.scheduleJob('* * * * *', function(){
+//   console.log("refresh check!");
+//   // var sql = 'select * from cctv_data order by rid desc limit 1'
+//   var sql = 'select * from test order by rid desc limit 1' //test
+//   conn.query(sql, (err, row) => {
+//       if (err) {
+//           console.log(err);
+//       } else {
+//           //console.log(row);
+//           res.json(row[0]); // latest row
+//       }
+//   });
+// });
+
 
 app.get('/', (req, res) => {
   res.redirect('/login');
@@ -130,6 +170,26 @@ app.get('/mainPage', (req, res) => {
         }
     });
 });
+
+
+// 데이터 새로고침
+// app.post('/mainPage/refreshData', (req, res) => {
+//     console.log(req.body);
+//     var job = schedule.scheduleJob('* * * * *', function(){
+//       console.log("refresh check!");
+//       // var sql = 'select * from cctv_data order by rid desc limit 1'
+//       var sql = 'select * from test order by rid desc limit 1' //test
+//       conn.query(sql, (err, row) => {
+//           if (err) {
+//               console.log(err);
+//           } else {
+//               //console.log(row);
+//               res.json(row[0]); // latest row
+//           }
+//       });
+//     });
+//
+// });
 
 
 //시작시간/종료시간을 지정하고, 수신한 데이터를 그래프로 표시
@@ -296,40 +356,3 @@ app.post('/mainPage/logout', (req, res) => {
 
     res.redirect('/login');
 });
-
-
-// Create Sample Data
-// app.get('/createSampleData', (req, res) => {
-//     res.render('./createDataPage.ejs');
-// });
-
-// app.post('/createSampleData', (req, res) => {
-//     console.log(req.body);
-//     var data = req.body;
-
-//     var startTime = new Date(data.startDate).setHours(data.startTime);
-//     var endTime = new Date(data.endDate).setHours(data.endDate);
-
-//     var flag = 1;
-//     var job = schedule.scheduleJob({
-//         start: startTime,
-//         end: endTime+1,
-//         rule: '*/5 * * * *' // 주기 (5분마다)
-//     },
-//     function() {
-//         if (flag == 1) {
-//             res.json('Scheduler is Working');
-//             flag = flag + 1;
-//         }
-
-//         var data = createData(5*60);
-//         var sql = 'INSERT into test(start_date, end_date, people, vehicle) value (?, ?, ?, ?)';
-//         conn.query(sql, [data.startDate, data.endDate, data.peopleNum, data.vehicleNum], (err) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 console.log('complete insert data');
-//             }
-//         });
-//     });
-// })

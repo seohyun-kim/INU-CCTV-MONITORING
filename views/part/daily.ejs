@@ -2,42 +2,44 @@
 <html>
     <head>
         <meta charset="utf-8">
-       
+
     </head>
     <body>
       <script>
         //정해진 시간에 해당하는 차량들 수 표시하는 함수
         function showcarData() {
-                  
+
                     const config = {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                    
+
                         _Date: $("#selectDay").val()})
                 };
                 fetch('/mainPage/tableDaytimeSelect2', config)
 
-               
+
                 .then(res => res.json())
 
                 .then(data => {
 
-                    const _car = document.querySelector('#car'); 
-                    const _bicycle = document.querySelector('#bicycle'); 
+                    const _car = document.querySelector('#car');
+                    const _bicycle = document.querySelector('#bicycle');
                     const _motorcycle = document.querySelector('#motorcycle');
                     const _truck = document.querySelector('#truck');
+                    const _electric_scooter = document.querySelector('#electric_scooter');
                    // $('#car').text( "승용차"+":".padEnd(8-(data[0]["sum(n_car)"]).toString().length)+"8대");
-                    
+
                     _car.innerText =data[0]["sum(n_car)"]+"대"
                     _bicycle.innerHTML =data[0]["sum(n_bicycle)"]+"대"
                     _motorcycle.innerText =data[0]["sum(n_motorcycle)"]+"대"
                     _truck.innerText =data[0]["sum(n_truck)"]+"대"
-                                 
+                    _electric_scooter.innerText =data[0]["sum(n_electric_scooter)"]+"대"
+
                 })
                 .catch(error => console.log(error))
 
-    
+
         }
         // function createImg(src, name, i) {
         // // var div = document.createElement('div');
@@ -53,7 +55,7 @@
         // img.alt = name;
         // img.title = name;
         // document.getElementById('#showimg2'+i).appendChild(img);
-        //  }   
+        //  }
         //시간에 따른 이미지 표시
         function showimg(){
 
@@ -65,7 +67,7 @@
                 method: "post",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                   
+
                     _Date: $("#selectDay").val()})
             };
             fetch('/mainPage/tableDaytimeSelect', config)
@@ -180,45 +182,45 @@
         //             method: "post",
         //             headers: {'Content-Type': 'application/json'},
         //             body: JSON.stringify({
-                    
+
         //                 _Date: $("#selectDay").val()})
         //         };
         //         fetch('/mainPage/carSpeed', config)
         //         .then(res => res.json())
-               
+
         //             .then(data => {
         //                 console.log(data);
-                        
+
         //         })
         //         .catch(error => console.log(error))
-            $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야'); 
-            $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~'); 
-            $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~'); 
+            $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야');
+            $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~');
+            $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~');
           }
            //정해진 시간에 해당하는 사람들 수 표시하는 함수
           function showperson(){
-            
+
             const config = {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                    
+
                         _Date: $("#selectDay").val()})
                 };
                 fetch('/mainPage/showpperson', config)
 
-               
+
                 .then(res => res.json())
 
                 .then(data => {
                     console.log(data);
 
-                    $('#personpeople').text("사람: "+data[0]['sum(n_person)']+"명");                   
+                    $('#personpeople').text("사람: "+data[0]['sum(n_person)']+"명");
                 })
                 .catch(error => console.log(error))
 
           }
-          function showChart(){  
+          function showChart(){
             $('#carchart').empty();
               const config = {
               method: "post",
@@ -229,26 +231,27 @@
           fetch('/mainPage/carData1', config)
             .then(res => res.json())
             .then(data => {
-             
+
               console.log(data);
             // generate an array of random data
             var data1 = [];
-            
-           
+
+
                 data1.push(
                     ['car',data[0]['sum(n_car)']],
                     ['bicycle',data[0]['sum(n_bicycle)']],
                     ['motorcycle',data[0]['sum(n_motorcycle)']],
-                    ['truck',data[0]['sum(n_truck)']]
+                    ['truck',data[0]['sum(n_truck)']].
+                    ['electric_scooter',data[0]['sum(n_electric_scooter)']]
                 );
-            var TotalVehicle=data[0]['sum(n_car)']+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']+data[0]['sum(n_truck)'];
-            
+            var TotalVehicle=data[0]['sum(n_car)']+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']+data[0]['sum(n_truck)'+a[0]['sum(n_electric_scooter)'];
+
             console.log(TotalVehicle);
             anychart.onDocumentReady(function () {
             var data = anychart.data.set(data1);
             var chart = anychart.pie(data);
             console.log(chart);
-           
+
             // set the chart radius making a donut chart
             chart
         .innerRadius('65%')
@@ -256,7 +259,7 @@
         .explode(25);
             // create a color palette
             var palette = anychart.palettes.distinctColors();
-            
+
             // set the colors according to the brands
             palette.items([
                 { color: '#1dd05d' },
@@ -265,19 +268,19 @@
                 { color: '#f60000' },
                 // { color: '#96a6a6' }
             ]);
-            
-            
+
+
             // apply the donut chart color palette
             chart.palette(palette);
-           
-           
+
+
             // set the position of labels
             chart.labels().format('{%x} : {%y}대').fontSize(13);
             chart.labels().fontColor('#000000');
-            
+
             // disable the legen
             chart.legend(false);
-            
+
             // format the donut chart tooltip
             chart.tooltip().format('{%x}: {%PercentValue}%');
             // create a standalone label
@@ -290,21 +293,21 @@
                 .anchor('center')
                 .hAlign('center')
                 .vAlign('middle')
-            
+
             // // set the label as the center content
-           
+
             chart.center().content(label);
-            
+
             // set container id for the chart
             chart.container('carchart');
-            
+
             // initiate chart drawing
             chart.draw();
-           
+
         })
          })
             .catch(error => console.log(error))
-        
+
         }
           $(function() {
             $(document).on("click", "#daySelectBtn", function(){
@@ -317,6 +320,7 @@
                 });
             });
         function doRefreshDay() {
+
             showDayTable();
             showimg();
             showcarData();
@@ -324,8 +328,8 @@
             showperson();
             showChart();
         }
-         
-        
+
+
         // function btnDayCallback(){
         //   $('#showCarSpeed').empty();
         //   $('#eachspeed').empty();
@@ -334,12 +338,11 @@
         //   $('#personpeople').empty();
         //   $("#container").empty();
         //   $("#container1").empty();
-              
+
         // }
-        
-       
+
+
       </script>
     </body>
 
 </html>
-
