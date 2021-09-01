@@ -2,18 +2,15 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>INU CCTV MONITORING SYSTEM</title>
+        <title>main page</title>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="http://code.highcharts.com/highcharts.js"></script>
         <script src="http://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script>
         <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
         <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
-
         <%-include('part/daily.ejs')%>
         <%-include('part/period.ejs')%>
-        <%-include('part/realtime.ejs')%>
-
         <style>
             img {
                 max-width: 40px;
@@ -159,19 +156,14 @@
                 <p style="text-align: center">실시간 데이터</p>
                 <div id="showRTData" style="border:1px solid; text-align: center;">
                     <img src="/images/people.png" alt="people image"><br>
-                    <p id="rtPeopleNum">0</p>
+                    <p id="rtPeopleNum">1</p>
                     <img src="/images/car.png"><br>
-                    <p id="rtCarNum">0</p>
+                    <p id="rtPeopleNum">1</p>
                     <img src="/images/bicycle.png"><br>
-                    <p id="rtBicycleNum">0</p>
+                    <p id="rtPeopleNum">1</p>
                     <img src="/images/truck.png"><br>
-                    <p id="rtTruckNum">0</p>
-                    <img src="/images/motorcycle.png"><br>
-                    <p id="rtMotocycleNum">0</p>
-                    <img src="/images/electric-scooter.png"><br>
-                    <p id="rtElectricNum">0</p>
-                    <p id="rtsum" style="text-align: center">합계: ~~~대</p>
-                    <!-- <button id="refreshBtn">임시 버튼</button> -->
+                    <p id="rtPeopleNum">1</p>
+                    <p style="text-align: center">합계: ~~~대</p>
                 </div>
             </div>
             <div id="showDayData" style="display:inline-block; vertical-align:top; width:91%">
@@ -213,10 +205,6 @@
                                               <th>트럭:</td>
                                               <td id="truck">~~대</td>
                                             </tr>
-                                            <tr>
-                                              <th>전동킥보드:</td>
-                                              <td id="electric_scooter">~~대</td>
-                                            </tr>
                                           </table>
                                         <!-- <p id="car">승용차:  ~~대</p>
                                         <p id="bicycle">자전거:  ~~대</p>
@@ -241,10 +229,6 @@
                                             </div>
                                             <div>
                                                 <img src="/images/truck.png">
-                                                <p>~~</p>
-                                            </div>
-                                            <div>
-                                                <img src="/images/electric-scooter.png">
                                                 <p>~~</p>
                                             </div>
                                         </div>
@@ -348,9 +332,6 @@
                                               <th>트럭:</td>
                                               <td id="truck1">~~대</td>
                                             </tr>
-                                            <th>전동킥보드:</td>
-                                            <td id="electric_scooter1">~~대</td>
-                                          </tr>
                                           </table>
                                         <!-- <p id="car1">승용차:  ~~대</p>
                                         <p id="bicycle1">자전거:  ~~대</p>
@@ -375,10 +356,6 @@
                                             </div>
                                             <div>
                                                 <img src="/images/truck.png">
-                                                <p>~~</p>
-                                              </div>
-                                              <div>
-                                                <img src="/images/electric-scooter.png">
                                                 <p>~~</p>
                                             </div>
                                         </div>
