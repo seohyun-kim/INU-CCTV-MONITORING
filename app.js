@@ -151,7 +151,7 @@ app.post('/mainPage/tableDatetimeSelect', (req, res) => {
 app.post('/mainPage/tableDatetimeSelect2', (req, res) => {
     var data = req.body;
     console.log(data.startDate);
-    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE date_time >=? AND date_time <= ?";
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck), sum(n_electric_scooter) FROM cctv_data WHERE date_time >=? AND date_time <= ?";
     conn.query(sql, [data.startDate, data.endDate], (err, row) => {
         if (err) {
             console.log(err);
@@ -166,7 +166,7 @@ app.post('/mainPage/tableDatetimeSelect2', (req, res) => {
 app.post('/mainPage/cardata', (req, res) => {
     var data = req.body;
     console.log(data.startDate);
-    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE date_time >=? AND date_time <= ?";
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck), sum(n_electric_scooter) FROM cctv_data WHERE date_time >=? AND date_time <= ?";
     conn.query(sql, [data.startDate, data.endDate], (err, row) => {
         if (err) {
             console.log(err);
@@ -213,7 +213,7 @@ app.post('/mainPage/tableDaytimeSelect', (req, res) => {
 app.post('/mainPage/tableDaytimeSelect2', (req, res) => {
     var data = req.body;
     console.log(data._Date);
-    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE  date_time >= CONCAT(?,' 00:00:00') AND date_time <= CONCAT(?,' 23:59:59')";
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck),sum(n_electric_scooter) FROM cctv_data WHERE  date_time >= CONCAT(?,' 00:00:00') AND date_time <= CONCAT(?,' 23:59:59')";
     conn.query(sql, [data._Date, data._Date], (err, row) => {
         if (err) {
             console.log(err);
@@ -228,7 +228,7 @@ app.post('/mainPage/tableDaytimeSelect2', (req, res) => {
 app.post('/mainPage/carData1', (req, res) => {
     var data = req.body;
     console.log(data.startDate);
-    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck) FROM cctv_data WHERE  date_time >= CONCAT(?,' 00:00:00') AND date_time <= CONCAT(?,' 23:59:59')";
+    var sql = "SELECT sum(n_car), sum(n_bicycle), sum(n_motorcycle),sum(n_truck),sum(n_electric_scooter) FROM cctv_data WHERE  date_time >= CONCAT(?,' 00:00:00') AND date_time <= CONCAT(?,' 23:59:59')";
     conn.query(sql, [data._Date, data._Date], (err, row) => {
         if (err) {
             console.log(err);

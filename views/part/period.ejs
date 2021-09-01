@@ -18,18 +18,19 @@
                 .then(res => res.json())
 
                     .then(data => {
-                    
-                        const _car = document.querySelector('#car1'); 
-                        const _bicycle = document.querySelector('#bicycle1'); 
+
+                        const _car = document.querySelector('#car1');
+                        const _bicycle = document.querySelector('#bicycle1');
                         const _motorcycle = document.querySelector('#motorcycle1');
                         const _truck = document.querySelector('#truck1');
+                        const  _electric_scooter = document.querySelector('#electric_scooter1');
                     // $('#car').text( "승용차"+":".padEnd(8-(data[0]["sum(n_car)"]).toString().length)+"8대");
-                        
+
                         _car.innerText =data[0]["sum(n_car)"]+"대"
                         _bicycle.innerHTML =data[0]["sum(n_bicycle)"]+"대"
                         _motorcycle.innerText =data[0]["sum(n_motorcycle)"]+"대"
-                        _truck.innerText =data[0]["sum(n_truck)"]+"대"           
-
+                        _truck.innerText =data[0]["sum(n_truck)"]+"대"
+                        _electric_scooter.innerText =data[0]["sum(n_electric_scooter)"]+"대"
                 })
                 .catch(error => console.log(error))
         }
@@ -222,7 +223,7 @@
                       })()
                   }]
               });
-              
+
 
 
               })
@@ -234,12 +235,12 @@
             // $('#showCarSpeed').text('속도 데이터 들어오면 넣을거야');
             // $('#eachspeed').text('이거슬도 속도데이터 들어오면 넣을래~~');
             // $('#carStayandRoot').text('정차,주차 유무,경로는 얘기해봐야할 거 같앙~.~');
-            
+
 
           }
-          
-       
-          //시작시간/종료시간에 해당하는  시림들의 수를 나타내주는 함수 
+
+
+          //시작시간/종료시간에 해당하는  시림들의 수를 나타내주는 함수
           function showPerson(){
             const config = {
                     method: "post",
@@ -253,15 +254,15 @@
                 .then(res => res.json())
 
                 .then(data => {
-                 
 
-                $('#personpeople1').text("사람: "+data[0]['sum(n_person)']+"명");                   
+
+                $('#personpeople1').text("사람: "+data[0]['sum(n_person)']+"명");
                 })
 
                 .catch(error => console.log(error))
 
           }
-          function showchart(){  
+          function showchart(){
              $('#container5').empty();
               const config = {
               method: "post",
@@ -273,19 +274,19 @@
           fetch('/mainPage/cardata', config)
             .then(res => res.json())
             .then(data => {
-             
+
               console.log(data);
             // generate an array of random data
             var data1 = [];
-            
-           
+
+
                 data1.push(
                     ['car',data[0]['sum(n_car)']],
                     ['bicycle',data[0]['sum(n_bicycle)']],
                     ['motorcycle',data[0]['sum(n_motorcycle)']],
                     ['truck',data[0]['sum(n_truck)']]
                 );
-                
+
            var totaldata=data[0]['sum(n_car)']+data[0]['sum(n_bicycle)']+data[0]['sum(n_motorcycle)']+data[0]['sum(n_truck)'];
            console.log(data1);
             anychart.onDocumentReady(function () {
@@ -296,7 +297,7 @@
             chart.innerRadius('55%')
             // create a color palette
             var palette = anychart.palettes.distinctColors();
-            
+
             // set the colors according to the brands
             palette.items([
                 { color: '#1dd05d' },
@@ -305,16 +306,16 @@
                 { color: '#f60000' },
                 // { color: '#96a6a6' }
             ]);
-            
+
             // apply the donut chart color palette
             chart.palette(palette);
-            
+
             // set the position of labels
             chart.labels().format('{%x} : {%y}대').fontSize(13);
             chart.labels().fontColor('#000000');
             // disable the legend
             chart.legend(false);
-            
+
             // format the donut chart tooltip
             chart.tooltip().format('{%x}: {%PercentValue}%');
             // create a standalone label
@@ -323,8 +324,8 @@
             label
                 .useHtml(true)
                 // .text(
-                // // '<span style = "color: #313136; font-size:10px;">150</span>' 
-                
+                // // '<span style = "color: #313136; font-size:10px;">150</span>'
+
                 // // '<br/><br/></br><span style="color:#444857; font-size: 14px;"><i>Spotify and Apple Music have more <br/>than 50% of the total market share</i></span>'
                 // )
                 .text(totaldata)
@@ -332,14 +333,14 @@
                 .anchor('center')
                 .hAlign('center')
                 .vAlign('middle')
-                
+
             // set the label as the center content
-           
+
             chart.center().content(label);
-            
+
             // set container id for the chart
             chart.container('container5');
-            
+
             // initiate chart drawing
             chart.draw();
             // const _totaldata = document.querySelector('#overlay');
@@ -347,7 +348,7 @@
         })
          })
             .catch(error => console.log(error))
-        
+
         }
           $(function() {
             $(document).on("click", "#dateSelectBtn", function(){
