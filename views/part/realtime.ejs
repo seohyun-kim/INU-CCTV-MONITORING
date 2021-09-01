@@ -24,15 +24,36 @@
 
         //데이터 새고로침
         function refreshData() {
-              console.log("refreshed!", data);
-              $('#rtPeopleNum').text(data.n_person);
-              $('#rtCarNum').text(data.n_car);
-              $('#rtBicycleNum').text(data.n_bicycle);
-              $('#rtTruckNum').text(data.n_truck);
-              $('#rtMotocycleNum').text(data.n_motorcycle);
-              $('#rtElectricNum').text(data.n_electric_scooter);
-              let sum=data.n_person+data.n_car+data.n_bicycle+data.n_truck+ data.n_motorcycle+data.n_electric_scooter;
-              $('#sum').text(sum);
+          console.log("refreshed!");
+          const config = {
+                      method: "post",
+                      headers: {'Content-Type': 'application/json'},
+                      body: JSON.stringify({
+
+                          _Date: $("#selectDay").val()})
+                  };
+                  fetch('/mainPage/refreshData', config)
+                  .then(res => res.json())
+
+                      .then(data => {
+                          console.log(data);
+                          $('#rtPeopleNum').text(data.n_person);
+                          $('#rtCarNum').text(data.n_car);
+                          $('#rtBicycleNum').text(data.n_bicycle);
+                          $('#rtTruckNum').text(data.n_truck);
+                          $('#rtMotocycleNum').text(data.n_motorcycle);
+                          $('#rtElectricNum').text(data.n_electric_scooter);
+                          let sum=data.n_person+data.n_car+data.n_bicycle+data.n_truck+ data.n_motorcycle+data.n_electric_scooter;
+                          $('#sum').text(sum);
+
+                  })
+                  .catch(error => console.log(error))
+
+
+
             }
+
+
+
       </script>
     </body>

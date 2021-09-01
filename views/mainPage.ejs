@@ -11,6 +11,7 @@
         <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
         <%-include('part/daily.ejs')%>
         <%-include('part/period.ejs')%>
+        <%-include('part/realtime.ejs')%>
         <style>
             img {
                 max-width: 40px;
@@ -435,6 +436,7 @@
             </div>
         </div>
         <script>
+            refreshData();
             initDate();
             doRefreshDay();
             doRefreshPeriod();
