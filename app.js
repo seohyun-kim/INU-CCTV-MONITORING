@@ -135,17 +135,21 @@ app.get('/mainPage', (req, res) => {
 
 // 데이터 새로고침
 app.post('/mainPage/refreshData', (req, res) => {
+    var job = schedule.scheduleJob('* * * * *', function(){
+        console.log("refreshed! test");
+        var sql = 'select * from test order by rid desc limit 1' //test
+        conn.query(sql, (err, row) => {
+            if (err) {
+                console.log(err);
+            } else {
+                //console.log(row);
+                res.json(row[0]); // latest row
+            }
+        });
+    });
     console.log(req.body);
       // var sql = 'select * from cctv_data order by rid desc limit 1'
-      var sql = 'select * from cctv_data order by rid desc limit 1' //test
-      conn.query(sql, (err, row) => {
-          if (err) {
-              console.log(err);
-          } else {
-              //console.log(row);
-              res.json(row[0]); // latest row
-          }
-      });
+
 
 
 });

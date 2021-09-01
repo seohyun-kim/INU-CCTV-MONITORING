@@ -1,12 +1,12 @@
 var mysql = require('mysql');
 var schedule = require('node-schedule');
-var date = require('date-utils');
+//var date = require('date-utils');
 var conn = require('./conf/db');//mysql 연결
 
 
 var job = schedule.scheduleJob(
-  //  '0/5 * * * * ?', // 주기 (5분마다)----5초 테스트
-  '0 0/5 * * * ?',
+    '0/5 * * * * ?', // 주기 (5분마다)----5초 테스트
+  //'0 0/5 * * * ?',
 function() {
     var data = createData(5*60);
     var sql = 'INSERT into test(date_time, n_person, n_car, n_truck, n_bus, n_bicycle, n_motorcycle, n_electric_scooter) value (?, ?, ?, ?,?,?,?,?)';
