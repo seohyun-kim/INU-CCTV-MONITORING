@@ -1,3 +1,4 @@
+/node_modules
 
 # db 접속정보
 conf/db.js
